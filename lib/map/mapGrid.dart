@@ -1,9 +1,7 @@
 void map(List<Room> rooms, List<int> currentPosition){
   rooms;
   currentPosition;
-  List<List<int>> tunnels = [
-    [2,1],[4,1],[1,2],[2,3]
-  ];
+
   bool existingRoom = false;
 
   // r-r
@@ -19,6 +17,7 @@ void map(List<Room> rooms, List<int> currentPosition){
   if(existingRoom == false){
     print('where are you');
   }
+
 }
 
 class Room {
