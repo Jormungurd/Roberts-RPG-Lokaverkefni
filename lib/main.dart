@@ -1,23 +1,15 @@
 import 'dart:io';
+import 'package:untitled/inventory/items.dart';
 import 'package:untitled/map/mapGrid.dart';
 import 'package:untitled/movement/movement.dart';
+import 'package:untitled/inventory/inventory.dart';
 
 void main() {
-  //rooms for the creation of the map-grid [x-coordinate, y-coordinate]
-  Room one = Room(position: [1, 1], roomDescription: ['one'], items: [], barriers: []);
-  Room two = Room(position: [3, 1], roomDescription: ['two'], items: [], barriers: []);
-  Room three = Room(position: [5, 1], roomDescription: ['three'], items: [], barriers: []);
-  Room four = Room(position: [1, 3], roomDescription: ['four'], items: [], barriers: []);
-  Room five = Room(position: [3, 3], roomDescription: ['five'], items: [], barriers: []);
+  List<Item> items = [];
+  createItems(items);
 
-  List<Room> rooms = [
-    one, two, three, four, five
-  ];
-
-  //testing map (r = room, - = tunnels)
-  // r-r
-  // -
-  // r-r-r
+  List<Room> rooms = [];
+  createRooms(rooms, items);
 
   //tunnels to connect the rooms
   List<List<int>> tunnels = [
@@ -27,22 +19,29 @@ void main() {
   //beginning position
   List<int> currentPosition = [1, 1];
 
+  //inventory
+  List<Item> inventory = [];
+  beginningInventory(inventory);
+
   //player input
   String? input;
 
   do{
-    //gives description of the room
-    map(rooms, currentPosition);
-    //gives movement options
-    for (String text in movementText(
-      isMovementLegal(
-        tunnels, possibleMovement(
-          currentPosition),
+    if (input != 'inventory'){
+      //gives description of the room
+      map(rooms, currentPosition, items);
+      //gives movement options
+      for (String legalMovement in movementText(
+        isMovementLegal(
+          tunnels, possibleMovement(
+            currentPosition),
         ),
       )
-    ){
-      print(text);
+      ){
+        print(legalMovement);
+      }
     }
+
     //player input
     input = stdin.readLineSync();
 
@@ -63,6 +62,10 @@ void main() {
         possibleMovement(currentPosition)).elementAt(3)
     ){
       currentPosition = [currentPosition.first-2, currentPosition.last];
+    }else if (input == 'inventory'){
+      showInventory(inventory);
+    }else if (input == 'pick up item'){
+      pickUpItems(rooms, items, inventory, currentPosition);
     }else if (input == 'quit'){
       break;
     }else{
