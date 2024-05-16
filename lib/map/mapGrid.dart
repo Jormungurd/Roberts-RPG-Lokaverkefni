@@ -1,4 +1,5 @@
 import 'package:untitled/inventory/items.dart';
+import 'package:untitled/map/Obstacles.dart';
 
 class Room {
   Room ({
@@ -11,13 +12,17 @@ class Room {
   List<int> position;
   List<String> roomDescription;
   List<Object> items;
-  List<Object> barriers;
+  List<Obstacle> barriers;
 }
 
-void createRooms (List<Room> rooms, List<Item> items){
+void createRooms (
+    List<Room> rooms,
+    List<Item> items,
+    List<Obstacle> obstacles
+    ){
   //rooms for the creation of the map-grid [x-coordinate, y-coordinate]
   Room one = Room(position: [1, 1], roomDescription: ['one'], items: [], barriers: []);
-  Room two = Room(position: [3, 1], roomDescription: ['two'], items: [], barriers: []);
+  Room two = Room(position: [3, 1], roomDescription: ['two'], items: [], barriers: [obstacles.elementAt(0)]);
   Room three = Room(position: [5, 1], roomDescription: ['three'], items: [items.elementAt(0)], barriers: []);
   Room four = Room(position: [1, 3], roomDescription: ['four'], items: [], barriers: []);
   Room five = Room(position: [3, 3], roomDescription: ['five'], items: [], barriers: []);

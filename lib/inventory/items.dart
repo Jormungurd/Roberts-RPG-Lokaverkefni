@@ -20,6 +20,6 @@ class Item {
 }
 
 void createItems (List<Item> items) {
-  Item broom = Item(name: 'broom', count: 1, key: '');
+  Item broom = Item(name: 'broom', count: 1, key: 'curiosity');
   items.add(broom);
 }

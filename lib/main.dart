@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:untitled/inventory/items.dart';
+import 'package:untitled/map/Obstacles.dart';
 import 'package:untitled/map/mapGrid.dart';
 import 'package:untitled/movement/movement.dart';
 import 'package:untitled/inventory/inventory.dart';
@@ -8,12 +9,17 @@ void main() {
   List<Item> items = [];
   createItems(items);
 
+  List<Obstacle> obstacles = [];
+  createObstacles(obstacles);
+
+
+
   List<Room> rooms = [];
-  createRooms(rooms, items);
+  createRooms(rooms, items, obstacles);
 
   //tunnels to connect the rooms
   List<List<int>> tunnels = [
-    [2,1],[4,1],[1,2],[2,3]
+    [2,1],[1,2],[2,3]
   ];
 
   //beginning position
@@ -30,6 +36,7 @@ void main() {
     if (input != 'inventory'){
       //gives description of the room
       map(rooms, currentPosition, items);
+      interactWithObstacles(rooms, currentPosition, obstacles, inventory, tunnels);
       //gives movement options
       for (String legalMovement in movementText(
         isMovementLegal(
