@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:untitled/inventory/items.dart';
 import 'package:untitled/map/mapGrid.dart';
 
@@ -57,6 +56,29 @@ void interactWithObstacles(
                 if (choice == "yes") {
                   //insert a do while loop or if statement here
 
+                  if (barrier.isBreakable == true){
+                    print('push or break?');
+                    choice = stdin.readLineSync();
+                  } else {
+                    choice = 'push';
+                  }
+
+                  if(choice == 'push'){
+                    if(barrier.isBlocking == true){
+                      barrier.isBlocking = false;
+                      tunnels.add(barrier.tunnelBlocked);
+                    }else {
+                      barrier.isBlocking = true;
+                      tunnels.remove(barrier.tunnelBlocked);
+                    }
+                  }
+                  if(choice == 'break' && barrier.isBreakable == true){
+                    barrier.isBlocking = false;
+                    barrier.isBroken = true;
+                    tunnels.add(barrier.tunnelBlocked);
+                    room.barriers.remove(barrier);
+                    break;
+                  }
                 } else if (choice == "no"){
                   break;
                 }
@@ -69,7 +91,19 @@ void interactWithObstacles(
                 print("do you want to interact with ${barrier.name}");
                 choice = stdin.readLineSync();
                 if (choice == "yes") {
-                  //insert if statement here
+                  for(Item item in inventory){
+                    if (item.key.toString() == barrier.lock.toString()){
+                      item.count--;
+                      if (item.count == 0){
+                        inventory.remove(item);
+                      }
+                      tunnels.add(barrier.tunnelBlocked);
+                      room.barriers.remove(barrier);
+                    }
+                  }
+                  if (room.barriers.isNotEmpty){
+                    print('you do not have the necessary item');
+                  }
                   break;
                 } else if (choice == "no"){
                   break;
@@ -88,10 +122,10 @@ void interactWithObstacles(
                   if (choice == barrier.code.toString()){
                     print('correct code');
                     tunnels.add(barrier.tunnelBlocked);
-                    room.barriers.removeLast();
+                    room.barriers.remove(barrier);
                     break;
                   } else {
-                    print('wrong code, try again?');
+                    print('wrong code');
                   }
                 } else if (choice == "no"){
                   break;

@@ -73,6 +73,21 @@ void main() {
       showInventory(inventory);
     }else if (input == 'pick up item'){
       pickUpItems(rooms, items, inventory, currentPosition);
+    }else if (input == 'reset'){
+      print('are you sure?');
+      input = stdin.readLineSync();
+      if(input == 'yes'){
+        items = [];
+        createItems(items);
+        obstacles = [];
+        createObstacles(obstacles);
+        rooms = [];
+        createRooms(rooms, items, obstacles);
+        tunnels = [[2,1],[1,2],[2,3]];
+        currentPosition = [1, 1];
+        inventory = [];
+        beginningInventory(inventory);
+      }
     }else if (input == 'quit'){
       break;
     }else{
