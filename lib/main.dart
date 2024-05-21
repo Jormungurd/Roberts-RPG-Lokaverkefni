@@ -1,98 +1,22 @@
 import 'dart:io';
-import 'package:untitled/inventory/items.dart';
-import 'package:untitled/map/Obstacles.dart';
-import 'package:untitled/map/mapGrid.dart';
-import 'package:untitled/movement/movement.dart';
-import 'package:untitled/inventory/inventory.dart';
+import 'package:untitled/central_hub/game.dart';
+import 'package:untitled/text/menuText.dart';
 
 void main() {
-  List<Item> items = [];
-  createItems(items);
+  String? menuChoice;
 
-  List<Obstacle> obstacles = [];
-  createObstacles(obstacles);
+  menuIntroText();
 
+  do {
+    print('Choose weather you want "controls", "play game" or "quit"');
+    menuChoice = stdin.readLineSync();
 
-
-  List<Room> rooms = [];
-  createRooms(rooms, items, obstacles);
-
-  //tunnels to connect the rooms
-  List<List<int>> tunnels = [
-    [2,1],[1,2],[2,3]
-  ];
-
-  //beginning position
-  List<int> currentPosition = [1, 1];
-
-  //inventory
-  List<Item> inventory = [];
-  beginningInventory(inventory);
-
-  //player input
-  String? input;
-
-  do{
-    if (input != 'inventory'){
-      //gives description of the room
-      map(rooms, currentPosition, items);
-      interactWithObstacles(rooms, currentPosition, obstacles, inventory, tunnels);
-      //gives movement options
-      for (String legalMovement in movementText(
-        isMovementLegal(
-          tunnels, possibleMovement(
-            currentPosition),
-        ),
-      )
-      ){
-        print(legalMovement);
-      }
-    }
-
-    //player input
-    input = stdin.readLineSync();
-
-    //outcome of input
-    if(input == 'north' && isMovementLegal(tunnels,
-        possibleMovement(currentPosition)).elementAt(0)
-    ){
-      currentPosition = [currentPosition.first, currentPosition.last+2];
-    } else if(input == 'east' && isMovementLegal(tunnels,
-        possibleMovement(currentPosition)).elementAt(1)
-    ){
-      currentPosition = [currentPosition.first+2, currentPosition.last];
-    }else if(input == 'south' && isMovementLegal(tunnels,
-        possibleMovement(currentPosition)).elementAt(2)
-    ){
-      currentPosition = [currentPosition.first, currentPosition.last-2];
-    }else if(input == 'west' && isMovementLegal(tunnels,
-        possibleMovement(currentPosition)).elementAt(3)
-    ){
-      currentPosition = [currentPosition.first-2, currentPosition.last];
-    }else if (input == 'inventory'){
-      showInventory(inventory);
-    }else if (input == 'pick up item'){
-      pickUpItems(rooms, items, inventory, currentPosition);
-    }else if (input == 'reset'){
-      print('are you sure?');
-      input = stdin.readLineSync();
-      if(input == 'yes'){
-        items = [];
-        createItems(items);
-        obstacles = [];
-        createObstacles(obstacles);
-        rooms = [];
-        createRooms(rooms, items, obstacles);
-        tunnels = [[2,1],[1,2],[2,3]];
-        currentPosition = [1, 1];
-        inventory = [];
-        beginningInventory(inventory);
-      }
-    }else if (input == 'quit'){
+    if (menuChoice == "controls") {
+      menuControlsText();
+    } else if (menuChoice == "play game") {
+      game();
+    } else if (menuChoice == "quit"){
       break;
-    }else{
-      print('command is either now allowed or not understood');
     }
-  } while (input != "quit");
-
+  }while (menuChoice != "quit");
 }
