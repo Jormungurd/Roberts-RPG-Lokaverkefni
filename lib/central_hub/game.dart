@@ -35,19 +35,22 @@ void game() {
     //insert "win" event here
 
     if (input != 'inventory'){
-      //gives description of the room
-      map(rooms, currentPosition, items);
-      interactWithObstacles(rooms, currentPosition, obstacles, inventory, tunnels);
-      //gives movement options
-      for (String legalMovement in movementText(
-        isMovementLegal(
-          tunnels, possibleMovement(
-            currentPosition),
-        ),
-      )
-      ){
-        print(legalMovement);
+      if(input != "help"){
+        //gives description of the room
+        map(rooms, currentPosition, items);
+        interactWithObstacles(rooms, currentPosition, obstacles, inventory, tunnels);
+        //gives movement options
+        for (String legalMovement in movementText(
+          isMovementLegal(
+            tunnels, possibleMovement(
+              currentPosition),
+          ),
+        )
+        ){
+          print(legalMovement);
+        }
       }
+
     }
 
     //player input
@@ -89,6 +92,12 @@ void game() {
         inventory = [];
         beginningInventory(inventory);
       }
+    }else if(input == 'help'){
+      print('north, east, south, west');
+      print('inventory');
+      print('pick up item');
+      print('reset');
+      print('quit');
     }else if (input == 'quit'){
       print('are you sure?');
       input = stdin.readLineSync();
