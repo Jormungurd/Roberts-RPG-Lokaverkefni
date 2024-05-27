@@ -6,24 +6,47 @@ import 'package:untitled/movement/movement.dart';
 import 'package:untitled/inventory/inventory.dart';
 
 void game() {
+  // item creation
   List<Item> items = [];
   createItems(items);
 
+  //obstacles creation
   List<Obstacle> obstacles = [];
   createObstacles(obstacles);
 
+  //map creation
   List<Room> rooms = [];
   createRooms(rooms, items, obstacles);
 
   //tunnels to connect the rooms
   List<List<int>> tunnels = [
-    [2,1],[1,2],[2,3]
+    [2,1],
+    [3,2],
+    [4,5],
+    [6,5],
+    [7,6],
+    [5,8],
+    [4,9],
+    [2,9],
+    [3,8],
+    [2,11],
+    [7,10],
+    [10,9],
+    [10,11],
+    [11,8],
+    [12,7],
+    [12,5],
+    [11,4],
+    [13,2],
+    [10,3],
+    [9,2],
+    [9,6],
   ];
 
   //beginning position
   List<int> currentPosition = [1, 1];
 
-  //inventory
+  //inventory creation
   List<Item> inventory = [];
   beginningInventory(inventory);
 
