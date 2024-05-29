@@ -18,80 +18,81 @@ class Room {
 void createRooms (
     List<Room> rooms,
     List<Item> items,
-    List<Obstacle> obstacles
+    List<Obstacle> obstacles,
+    List<List<String>> roomTextList
     ){
   //rooms for the creation of the map-grid [x-coordinate, y-coordinate]
-  Room start = Room(position: [1, 1], roomDescription: ['start'],
+  Room start = Room(position: [1, 1], roomDescription: roomTextList.elementAt(0),
       items: [], barriers: []);
-  Room corridorOne = Room(position: [3, 1], roomDescription: ['corridorOne'],
+  Room corridorOne = Room(position: [3, 1], roomDescription: roomTextList.elementAt(1),
       items: [], barriers: [obstacles.elementAt(0)]);
-  Room occultRoom = Room(position: [5, 1], roomDescription: ['occultRoom'],
+  Room occultRoom = Room(position: [5, 1], roomDescription: roomTextList.elementAt(2),
       items: [items.elementAt(6)], barriers: []);
-  Room cobblestoneRoom = Room(position: [3, 3], roomDescription: ['cobblestoneRoom'],
+  Room cobblestoneRoom = Room(position: [3, 3], roomDescription: roomTextList.elementAt(3),
       items: [], barriers: [obstacles.elementAt(6)]);
-  Room corridorTwo = Room(position: [3, 5], roomDescription: ['corridorTwo'],
+  Room corridorTwo = Room(position: [3, 5], roomDescription: roomTextList.elementAt(4),
       items: [], barriers: []);
-  Room corridorThree = Room(position: [5, 5], roomDescription: ['corridorThree'],
+  Room corridorThree = Room(position: [5, 5], roomDescription: roomTextList.elementAt(5),
       items: [], barriers: [obstacles.elementAt(11)]);
-  Room corridorFour = Room(position: [7, 5], roomDescription: ['corridorFour'],
+  Room corridorFour = Room(position: [7, 5], roomDescription: roomTextList.elementAt(6),
       items: [], barriers: [obstacles.elementAt(12)]);
-  Room armory = Room(position: [7, 7], roomDescription: ['armory'],
+  Room armory = Room(position: [7, 7], roomDescription: roomTextList.elementAt(7),
       items: [items.elementAt(5)], barriers: []);
-  Room closet = Room(position: [7, 3], roomDescription: ['closet'],
+  Room closet = Room(position: [7, 3], roomDescription: roomTextList.elementAt(8),
       items: [items.elementAt(0)], barriers: []);
-  Room corridorFive = Room(position: [5, 7], roomDescription: ['corridorFive'],
+  Room corridorFive = Room(position: [5, 7], roomDescription: roomTextList.elementAt(9),
       items: [], barriers: []);
-  Room openSpace = Room(position: [5, 9], roomDescription: ['openSpace'],
+  Room openSpace = Room(position: [5, 9], roomDescription: roomTextList.elementAt(10),
       items: [], barriers: [obstacles.elementAt(1)]);
-  Room statueRoom = Room(position: [3, 9], roomDescription: ['statueRoom'],
+  Room statueRoom = Room(position: [3, 9], roomDescription: roomTextList.elementAt(11),
       items: [], barriers: [obstacles.elementAt(4)]);
-  Room pedestalRoom = Room(position: [1, 9], roomDescription: ['pedestalRoom'],
+  Room pedestalRoom = Room(position: [1, 9], roomDescription: roomTextList.elementAt(12),
       items: [items.elementAt(1)], barriers: []);
-  Room artGallery = Room(position: [3, 7], roomDescription: ['artGallery'],
+  Room artGallery = Room(position: [3, 7], roomDescription: roomTextList.elementAt(13),
       items: [], barriers: [obstacles.elementAt(3)]);
-  Room fortifiedRoom = Room(position: [1, 7], roomDescription: ['fortifiedRoom'],
+  Room fortifiedRoom = Room(position: [1, 7], roomDescription: roomTextList.elementAt(14),
       items: [], barriers: [obstacles.elementAt(10)]);
-  Room bloodyRoom = Room(position: [1, 5], roomDescription: ['bloodyRoom'],
+  Room bloodyRoom = Room(position: [1, 5], roomDescription: roomTextList.elementAt(15),
       items: [items.elementAt(2)], barriers: []);
-  Room hiddenStudy = Room(position: [3, 11], roomDescription: ['hiddenStudy'],
+  Room hiddenStudy = Room(position: [3, 11], roomDescription: roomTextList.elementAt(16),
       items: [], barriers: []);
-  Room library = Room(position: [1, 11], roomDescription: ['library'],
+  Room library = Room(position: [1, 11], roomDescription: roomTextList.elementAt(17),
       items: [items.elementAt(4)], barriers: []);
-  Room grandHall = Room(position: [7, 9], roomDescription: ['grandHall'],
+  Room grandHall = Room(position: [7, 9], roomDescription: roomTextList.elementAt(18),
       items: [], barriers: [obstacles.elementAt(8)]);
-  Room tapestryRoom = Room(position: [7, 11], roomDescription: ['tapestryRoom'],
+  Room tapestryRoom = Room(position: [7, 11], roomDescription: roomTextList.elementAt(19),
       items: [], barriers: []);
-  Room eventRoom = Room(position: [9, 9], roomDescription: ['eventRoom'],
+  Room eventRoom = Room(position: [9, 9], roomDescription: roomTextList.elementAt(20),
       items: [], barriers: []);
-  Room corridorSix = Room(position: [11, 9], roomDescription: ['corridorSix'],
+  Room corridorSix = Room(position: [11, 9], roomDescription: roomTextList.elementAt(21),
       items: [], barriers: [obstacles.elementAt(7)]);
-  Room runDownRoom = Room(position: [11, 11], roomDescription: ['runDownRoom'],
+  Room runDownRoom = Room(position: [11, 11], roomDescription: roomTextList.elementAt(22),
       items: [], barriers: []);
-  Room naturalSpringRoom = Room(position: [9, 11], roomDescription: ['naturalSpringRoom'],
+  Room naturalSpringRoom = Room(position: [9, 11], roomDescription: roomTextList.elementAt(23),
       items: [items.elementAt(3)], barriers: []);
-  Room corridorSeven = Room(position: [11, 7], roomDescription: ['corridorSeven'],
+  Room corridorSeven = Room(position: [11, 7], roomDescription: roomTextList.elementAt(24),
       items: [], barriers: []);
-  Room corridorEight = Room(position: [13, 7], roomDescription: ['corridorEight'],
+  Room corridorEight = Room(position: [13, 7], roomDescription: roomTextList.elementAt(25),
       items: [], barriers: [obstacles.elementAt(13), obstacles.elementAt(9)]);
-  Room mortuary = Room(position: [13, 9], roomDescription: ['mortuary'],
+  Room mortuary = Room(position: [13, 9], roomDescription: roomTextList.elementAt(26),
       items: [], barriers: []);
-  Room corridorNine = Room(position: [13, 5], roomDescription: ['corridorNine'],
+  Room corridorNine = Room(position: [13, 5], roomDescription: roomTextList.elementAt(27),
       items: [], barriers: []);
-  Room fortificationsRoom = Room(position: [11, 5], roomDescription: ['fortificationsRoom'],
+  Room fortificationsRoom = Room(position: [11, 5], roomDescription: roomTextList.elementAt(28),
       items: [], barriers: []);
-  Room corridorTen = Room(position: [11, 3], roomDescription: ['corridorTen'],
+  Room corridorTen = Room(position: [11, 3], roomDescription: roomTextList.elementAt(29),
       items: [], barriers: [obstacles.elementAt(5)]);
-  Room oldChurch = Room(position: [13, 3], roomDescription: ['oldChurch'],
+  Room oldChurch = Room(position: [13, 3], roomDescription: roomTextList.elementAt(30),
       items: [], barriers: []);
-  Room prayerRoom = Room(position: [13, 1], roomDescription: ['prayerRoom'],
+  Room prayerRoom = Room(position: [13, 1], roomDescription: roomTextList.elementAt(31),
       items: [], barriers: []);
-  Room corridorEleven = Room(position: [9, 3], roomDescription: ['corridorEleven'],
+  Room corridorEleven = Room(position: [9, 3], roomDescription: roomTextList.elementAt(32),
       items: [], barriers: [obstacles.elementAt(2)]);
-  Room corpseRoom = Room(position: [9, 1], roomDescription: ['corpseRoom'],
+  Room corpseRoom = Room(position: [9, 1], roomDescription: roomTextList.elementAt(33),
       items: [], barriers: []);
-  Room brightRoom = Room(position: [9, 5], roomDescription: ['brightRoom'],
+  Room brightRoom = Room(position: [9, 5], roomDescription: roomTextList.elementAt(34),
       items: [], barriers: []);
-  Room end = Room(position: [9, 7], roomDescription: ['end'],
+  Room end = Room(position: [9, 7], roomDescription: [''],
       items: [], barriers: []);
 
   rooms.addAll([
@@ -134,6 +135,34 @@ void createRooms (
   ]);
 }
 
+void createTunnels(List<List<int>> tunnels){
+  List<List<int>> createTunnels = [
+    [2,1],
+    [3,2],
+    [4,5],
+    [6,5],
+    [7,6],
+    [5,8],
+    [4,9],
+    [2,9],
+    [3,8],
+    [2,11],
+    [7,10],
+    [10,9],
+    [10,11],
+    [11,8],
+    [12,7],
+    [12,5],
+    [11,4],
+    [13,2],
+    [10,3],
+    [9,2],
+    [9,6],
+  ];
+
+  tunnels.addAll(createTunnels);
+}
+
 void map(List<Room> rooms, List<int> currentPosition, List<Item> items){
   rooms;
   currentPosition;
@@ -147,6 +176,7 @@ void map(List<Room> rooms, List<int> currentPosition, List<Item> items){
         print(text);
       }
       if (room.items.isNotEmpty){
+        print('');
         for(Item item in items){
           if (item == room.items.first){
             item.getNameRoom();

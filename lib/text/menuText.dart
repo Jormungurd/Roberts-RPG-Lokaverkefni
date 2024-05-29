@@ -1,5 +1,5 @@
 void menuIntroText(){
-  print('Welcome to (insert game name here)');
+  print('Welcome to Crypt Labyrinth');
   print('');
   print('before you begin playing the game it is highly recommended');
   print('that you go through the controls to familiarize them since');

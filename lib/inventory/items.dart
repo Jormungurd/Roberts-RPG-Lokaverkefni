@@ -26,7 +26,7 @@ void createItems (List<Item> items) {
   Item rustyKey = Item(name: 'rusty key', count: 1, key: 'rusty');
   Item ironKey = Item(name: 'heavy iron key', count: 1, key: 'iron');
   Item bronzeKeyring = Item(name: 'bronze keyring', count: 3, key: 'bronze');
-  Item blackParchment = Item(name: 'black parchment with gold etchings', count: 1, key: 'event');
+  Item blackParchment = Item(name: 'black parchment', count: 1, key: 'event');
   items.addAll([
     broom,
     mysteriousOrb,

@@ -1,9 +1,13 @@
 import 'dart:io';
+import 'package:untitled/events/trapEvent.dart';
 import 'package:untitled/inventory/items.dart';
 import 'package:untitled/map/Obstacles.dart';
 import 'package:untitled/map/mapGrid.dart';
 import 'package:untitled/movement/movement.dart';
 import 'package:untitled/inventory/inventory.dart';
+import 'package:untitled/text/endText.dart';
+import 'package:untitled/text/introText.dart';
+import 'package:untitled/text/roomText.dart';
 
 void game() {
   // item creation
@@ -14,34 +18,17 @@ void game() {
   List<Obstacle> obstacles = [];
   createObstacles(obstacles);
 
+  //text creation for rooms
+  List<List<String>> roomTextList = [];
+  roomText(roomTextList);
+
   //map creation
   List<Room> rooms = [];
-  createRooms(rooms, items, obstacles);
+  createRooms(rooms, items, obstacles, roomTextList);
 
   //tunnels to connect the rooms
-  List<List<int>> tunnels = [
-    [2,1],
-    [3,2],
-    [4,5],
-    [6,5],
-    [7,6],
-    [5,8],
-    [4,9],
-    [2,9],
-    [3,8],
-    [2,11],
-    [7,10],
-    [10,9],
-    [10,11],
-    [11,8],
-    [12,7],
-    [12,5],
-    [11,4],
-    [13,2],
-    [10,3],
-    [9,2],
-    [9,6],
-  ];
+  List<List<int>> tunnels = [];
+  createTunnels(tunnels);
 
   //beginning position
   List<int> currentPosition = [1, 1];
@@ -53,31 +40,107 @@ void game() {
   //player input
   String? input;
 
+  //intro text
+  introText();
+
+  bool firstTime = true;
+
   do{
-    //insert "trap" event here
-    //insert "win" event here
-
-    if (input != 'inventory'){
-      if(input != "help"){
-        //gives description of the room
-        map(rooms, currentPosition, items);
-        interactWithObstacles(rooms, currentPosition, obstacles, inventory, tunnels);
-        //gives movement options
-        for (String legalMovement in movementText(
-          isMovementLegal(
-            tunnels, possibleMovement(
-              currentPosition),
-          ),
-        )
-        ){
-          print(legalMovement);
+    bool menu = false;
+    bool isAlive = true;
+    //win event
+    if(currentPosition.first == 9 && currentPosition.last == 7){
+      endText();
+      print('');
+      print('congratulations on winning the game');
+      do{
+        print('do you want to "restart" the game or go to the "menu"?');
+        input = stdin.readLineSync();
+        if(input == 'restart'){
+          items = [];
+          createItems(items);
+          obstacles = [];
+          createObstacles(obstacles);
+          roomTextList = [];
+          roomText(roomTextList);
+          rooms = [];
+          createRooms(rooms, items, obstacles, roomTextList);
+          tunnels = [];
+          createTunnels(tunnels);
+          currentPosition = [1, 1];
+          inventory = [];
+          beginningInventory(inventory);
+          firstTime = true;
+          break;
+        }else if(input == 'menu'){
+          menu = true;
+          break;
+        }else{
+          print('invalid command');
         }
-      }
-
+      }while(input != 'restart');
     }
 
-    //player input
-    input = stdin.readLineSync();
+    if (menu == false){
+      //trap event
+      if(currentPosition.first == 9 && currentPosition.last == 9 && firstTime == true){
+        isAlive = trapEvent(firstTime, inventory);
+      }
+
+      if(isAlive == true){
+        if (input != 'inventory'){
+          if(input != "help"){
+            //gives description of the room
+            map(rooms, currentPosition, items);
+            print('');
+            interactWithObstacles(rooms, currentPosition, obstacles, inventory, tunnels);
+            //gives movement options
+            for (String legalMovement in movementText(
+              isMovementLegal(
+                tunnels, possibleMovement(
+                  currentPosition),
+              ),
+            )
+            ){
+              print(legalMovement);
+            }
+          }
+
+        }
+        //player input
+        input = stdin.readLineSync();
+      }else{
+        //happens if you during the trap event
+        print('');
+        print('You did not make it out of the dungeon');
+        do{
+          print('do you want to "restart" the game or go to the "menu"?');
+          input = stdin.readLineSync();
+          if(input == 'restart'){
+            items = [];
+            createItems(items);
+            obstacles = [];
+            createObstacles(obstacles);
+            roomTextList = [];
+            roomText(roomTextList);
+            rooms = [];
+            createRooms(rooms, items, obstacles, roomTextList);
+            tunnels = [];
+            createTunnels(tunnels);
+            currentPosition = [1, 1];
+            inventory = [];
+            beginningInventory(inventory);
+            firstTime = true;
+            break;
+          }else if(input == 'menu'){
+            menu = true;
+            break;
+          }else{
+            print('invalid command');
+          }
+        }while(input != 'restart');
+      }
+    }
 
     //outcome of input
     if(input == 'north' && isMovementLegal(tunnels,
@@ -108,12 +171,16 @@ void game() {
         createItems(items);
         obstacles = [];
         createObstacles(obstacles);
+        roomTextList = [];
+        roomText(roomTextList);
         rooms = [];
-        createRooms(rooms, items, obstacles);
-        tunnels = [[2,1],[1,2],[2,3]];
+        createRooms(rooms, items, obstacles, roomTextList);
+        tunnels = [];
+        createTunnels(tunnels);
         currentPosition = [1, 1];
         inventory = [];
         beginningInventory(inventory);
+        firstTime = true;
       }
     }else if(input == 'help'){
       print('north, east, south, west');
@@ -127,6 +194,8 @@ void game() {
       if(input == 'yes') {
         break;
       }
+    }else if(menu == true){
+      break;
     }else{
       print('command is either now allowed or not understood');
     }
