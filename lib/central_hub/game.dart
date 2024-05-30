@@ -85,6 +85,7 @@ void game() {
       //trap event
       if(currentPosition.first == 9 && currentPosition.last == 9 && firstTime == true){
         isAlive = trapEvent(firstTime, inventory);
+        firstTime = false;
       }
 
       if(isAlive == true){

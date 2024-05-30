@@ -33,9 +33,9 @@ void createRooms (
   Room corridorTwo = Room(position: [3, 5], roomDescription: roomTextList.elementAt(4),
       items: [], barriers: []);
   Room corridorThree = Room(position: [5, 5], roomDescription: roomTextList.elementAt(5),
-      items: [], barriers: [obstacles.elementAt(11)]);
-  Room corridorFour = Room(position: [7, 5], roomDescription: roomTextList.elementAt(6),
       items: [], barriers: [obstacles.elementAt(12)]);
+  Room corridorFour = Room(position: [7, 5], roomDescription: roomTextList.elementAt(6),
+      items: [], barriers: [obstacles.elementAt(11)]);
   Room armory = Room(position: [7, 7], roomDescription: roomTextList.elementAt(7),
       items: [items.elementAt(5)], barriers: []);
   Room closet = Room(position: [7, 3], roomDescription: roomTextList.elementAt(8),

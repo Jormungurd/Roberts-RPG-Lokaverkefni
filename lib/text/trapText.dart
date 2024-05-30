@@ -25,7 +25,7 @@ void trapTextConclusion(int outcome){
   }
   if(outcome == 3){
     print('You take out the keyring and begin shaking it around hoping the darkness will');
-    print('leave you be due to the noise, but it doesn’t. It creeps ever closer until you it');
+    print('leave you be due to the noise, but it doesn’t. It creeps ever closer until it');
     print('seeps into your lungs and suffocates you and you breath your last, though it');
     print('isn’t the first time for you.');
     print('');
@@ -35,8 +35,8 @@ void trapTextConclusion(int outcome){
     print('You take out your matches and light them thinking that it will keep the darkness');
     print('at bay. For a moment you feel safe until you notice that the darkness hasn’t');
     print('slowed down in its approach if anything it has become faster. As you begin to');
-    print(' panic it has reached you and imbues some sort of magic into the flames. The');
-    print('flames grow larger and engulf you in flames. As your skin burns and your cold');
+    print('panic it has reached you and imbues some sort of magic into the flames. The');
+    print('flames grow larger and engulf you. As your skin burns and your cold');
     print('blood boils you die in agony.');
     print('');
     print('Game over. Your light has been snuffed.');
@@ -45,15 +45,15 @@ void trapTextConclusion(int outcome){
     print('You take out your trowel and begin desperately digging at the stone ground');
     print('hoping to get away but its no use, you can’t dig through and the darkness it');
     print('rapidly approaching. As the darkness reaches you it begins to crush you and');
-    print(' your elongated spine, you die within moments.');
+    print('your elongated spine, you die within moments.');
     print('');
     print('Game over. You dug your own grave.');
   }
   if(outcome == 6){
-    print('You take out your sickle attempting to thrash and cut away t the darkness but its');
+    print('You take out your sickle attempting to thrash and cut away at the darkness but its');
     print('no use. Its intangible to your efforts and as it approaches you it cuts into your');
     print('deathly pale skin once, then twice, then thrice, then many more times until you');
-    print('bled to death.');
+    print('bleed to death.');
     print('');
     print('Game over. Death’s scythe is much more impressive than yours.');
   }
